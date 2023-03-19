@@ -143,7 +143,7 @@ function startTimer(time){
         }
         else{
             timeCount.textContent = time; //changing the value of timeCount with time value
-        time--; //decrement the time value
+            time--; //decrement the time value
         }
     }
 }
