@@ -135,12 +135,15 @@ function restartQuiz(){
 function startTimer(time){
     counter = setInterval(timer, 1000);
     function timer(){
-        timeCount.textContent = time; //changing the value of timeCount with time value
-        time--; //decrement the time value
+        
         
         if(time < 0){ //if timer is less than 0
             clearInterval(counter); //clear 
             
+        }
+        else{
+            timeCount.textContent = time; //changing the value of timeCount with time value
+        time--; //decrement the time value
         }
     }
 }
