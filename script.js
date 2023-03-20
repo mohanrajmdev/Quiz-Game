@@ -87,7 +87,7 @@ function checkAnswer(){
         if(selectedAnswer == HTMLDecode(correctAnswer)){
             let audio = document.getElementById('Answeraudio');
             audio.play();
-            correctScore+=10+timeCounts;
+            correctScore+=timeCounts;
             _result.innerHTML = `<p><i class = "fas fa-check"></i>Correct Answer!</p>`;
         } else {
             let audio = document.getElementById('Wrongaudio');
