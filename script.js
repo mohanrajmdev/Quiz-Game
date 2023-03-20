@@ -8,9 +8,18 @@ const _correctScore = document.getElementById('correct-score');
 const _totalQuestion = document.getElementById('total-question');
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
+const startBtn = document.querySelector('.start_btn');
+const displayBlock = document.getElementById('displayStart');
+const score=document.getElementById('score');
 
-let correctAnswer = "", correctScore ,askedCount = 0, totalQuestion = 15;
+startBtn.addEventListener("click",function(){
+    displayBlock.style.display='block';
+    startBtn.style.display='none';
+})
 
+
+let correctAnswer = "", correctScore=0, askedCount = 0, totalQuestion = 15;
+let timeCounts=16,counter;
 // load question from API
 async function loadQuestion(){
     const APIUrl = 'https://opentdb.com/api.php?amount=1';
@@ -36,7 +45,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
 // display question and options
 function showQuestion(data){
-    startTimer(15);
+    timeCounts=16;
+    clearInterval(counter);
+    
+    startTimer();
     _checkBtn.disabled = false;
     correctAnswer = data.correct_answer;
     let incorrectAnswer = data.incorrect_answers;
@@ -75,19 +87,19 @@ function checkAnswer(){
         if(selectedAnswer == HTMLDecode(correctAnswer)){
             let audio = document.getElementById('Answeraudio');
             audio.play();
-            correctScore++;
+            correctScore+=10+timeCounts;
             _result.innerHTML = `<p><i class = "fas fa-check"></i>Correct Answer!</p>`;
         } else {
             let audio = document.getElementById('Wrongaudio');
             audio.play();
             _result.innerHTML = `<p><i class = "fas fa-times"></i>Incorrect Answer!</p> <small><b>Correct Answer: </b>${correctAnswer}</small>`;
-
         }
+        score.innerHTML=`<p>${correctScore}</p>`;
+        clearInterval(timeCounts);
         checkCount();
     } else {
         _result.innerHTML = `<p><i class = "fas fa-question"></i>Please select an option!</p>`;
         _checkBtn.disabled = false;
-        
     }
 }
 
@@ -105,7 +117,6 @@ function checkCount(){
         setTimeout(function(){
             console.log("");
         }, 5000);
-
 
         _result.innerHTML += `<p>Your score is ${correctScore}.</p>`;
         _playAgainBtn.style.display = "block";
@@ -125,6 +136,7 @@ function setCount(){
 
 function restartQuiz(){
     correctScore = askedCount = 0;
+    timeCounts=15;
     _playAgainBtn.style.display = "none";
     _checkBtn.style.display = "block";
     _checkBtn.disabled = false;
@@ -132,18 +144,26 @@ function restartQuiz(){
     loadQuestion();
 }
 
-function startTimer(time){
-    counter = setInterval(timer, 1000);
-    function timer(){
-        
-        
-        if(time < 0){ //if timer is less than 0
-            clearInterval(counter); //clear 
-            
+function startTimer(){
+    counter=setInterval(()=>{
+        timeCounts--;
+        timeCount.innerHTML=`${timeCounts}s`;
+        if(timeCounts==0){
+            clearInterval(counter);
+            loadQuestion();
         }
-        else{
-            timeCount.textContent = time; //changing the value of timeCount with time value
-            time--; //decrement the time value
-        }
-    }
+    },1000);
 }
+// counter = setInterval(timer, 1000);
+// function timer(){
+        
+        
+//     if(time < 0){ //if timer is less than 0
+//         clearInterval(counter); //clear 
+        
+//     }
+//     else{
+//         timeCount.textContent = time; //changing the value of timeCount with time value
+//         time--; //decrement the time value
+//     }
+// }
