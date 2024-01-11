@@ -1,8 +1,12 @@
 ## Quiz Game
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=mohanrajmdev_Quiz-Game)](https://sonarcloud.io/summary/new_code?id=mohanrajmdev_Quiz-Game)
+
 ![QuizGame Image](quizgame.png)
 
 Welcome to the Quiz Game! This interactive quiz application is designed to test your knowledge on various topics. Whether you're looking to challenge yourself or compete with friends, this quiz game provides an engaging and fun way to learn new facts.
+
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=mohanrajmdev_Quiz-Game)
 
 ## Features
 - **Multiple Categories:** Choose from a wide range of categories, including general knowledge, science, history, geography, and more.
